@@ -46,7 +46,7 @@ public class ps1ax {
             return true;
         } else {
             for (int i = 0; i < arr.length - 1; i++) {
-                if (arr[i] > arr[i+1]) {
+                if (arr[i] > arr[i + 1]) {
                     return false;
                 }
             }
@@ -56,4 +56,20 @@ public class ps1ax {
 
     }
 
+    public static void scale(int[] arr, int factor) {
+        if (arr == null) {
+            throw new IllegalArgumentException(
+                    "Null array"
+            );
+        } else if (arr.length == 0) {
+            return;
+        } else {
+            for (int i = 0; i < arr.length; i++) {
+                arr[i] = factor * arr[i];
+            }
+        }
+
+//        return;
+    }
 }
+
