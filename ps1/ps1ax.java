@@ -36,7 +36,7 @@ public class ps1ax {
 
     }
 
-
+    // ps1 - 2.1
     public static boolean isSorted(int[] arr) {
         if (arr == null) {
             throw new IllegalArgumentException(
@@ -56,6 +56,7 @@ public class ps1ax {
 
     }
 
+    // ps 1 - 2.2
     public static void scale(int[] arr, int factor) {
         if (arr == null) {
             throw new IllegalArgumentException(
