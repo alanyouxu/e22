@@ -73,6 +73,10 @@ public class Problem6 {
         return bwOr(b1.substring(0, b1.length()-1), b2.substring(0, b2.length()-1)) + c;
     }
 
+    public static int indexOf(char c, String s) {
+        if (s == null || s.length() == 0) return -1;
+        return 0;
+    }
 
 
     public static void main(String[] args) {
@@ -95,11 +99,10 @@ public class Problem6 {
         // System.out.println(numDiff("", "abc"));
         // System.out.println();
 
-        System.out.println(bwOr("10100", "00101"));
-        System.out.println(bwOr("10100", "1000101"));
-        System.out.println(bwOr("10111", ""));
-        
-        System.out.println(bwOr("", "0110"));
+        // System.out.println(bwOr("10100", "00101"));
+        // System.out.println(bwOr("10100", "1000101"));
+        // System.out.println(bwOr("10111", ""));
+        // System.out.println(bwOr("", "0110"));
     
     }
 
