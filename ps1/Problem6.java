@@ -77,16 +77,34 @@ public class Problem6 {
         return bwOr(b1.substring(0, b1.length()-1), b2.substring(0, b2.length()-1)) + c;
     }
 
-    public static int indexOf(char c, String s) {
-        // if (s == null || s.length() == 0) return -1;
-        // return 0;
-        return indexOfHelper(c, s, 0);
-    }
+    // // returns index of first occurence of c within s, -1 if not present 
+    // public static int indexOf(char c, String s) {
+    //     if (s == null || s.length() == 0) return -1;
+    //     // return 0;
+    //     return indexOfHelper(c, s, 0);
+    // }
 
-    public static int indexOfHelper(char c, String s, int pos) {
+    // // helper function for indexOf to keep track of position
+    // public static int indexOfHelper(char c, String s, int pos) {
+    //     if (s == null || s.length() == 0) return -1;
+    //     if (s.charAt(0) == c) return pos;
+    //     return indexOfHelper(c, s.substring(1), pos + 1);
+    // }
+
+
+    // returns index of char c in string s
+    // no helper function! looks forward to see if the string ends and passes -1 all the way back if so
+    // otherwise returns an incrementing x
+    public static int indexOf(char c, String s) {
         if (s == null || s.length() == 0) return -1;
-        if (s.charAt(0) == c) return pos;
-        return indexOfHelper(c, s.substring(1), pos + 1);
+        if (s.charAt(0) == c) return 0;
+
+        int x = indexOf(c, s.substring(1));
+
+        if (x == -1) {
+            return -1;
+        } else { 
+            return 1 + x;}
     }
 
 
@@ -95,7 +113,7 @@ public class Problem6 {
         // System.out.println(sumSquares(ax, 0));
 
         // String s = "abdft";
-        char c = 'c';
+        // char c = 'c';
         // String s = null;
         // printReverse(s);
         // System.out.println(reflect(s));
