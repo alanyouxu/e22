@@ -2,9 +2,9 @@ public class Problem6 {
     public static int sumSquares(int[] vals, int start) {
         // take an array of vals of 1 or more integers and non-negative integer start
         // return sum of the squares from position start
-        // assume vals non-null / start non-negative
-        if (start >= vals.length) {
-            return 0;
+        // assume vals is non-null and start is non-negative (though sometimes i took care of these exceptions)
+        if (vals == null || start < 0 || start >= vals.length) {
+            return 0; 
         }
         
         int x = vals[start] * vals[start];
@@ -12,8 +12,8 @@ public class Problem6 {
     }
 
 
+    // prints string in reverse, no return value
     // "abc" prints "cba"
-    // prints string in reverse
     public static void printReverse(String s) {
         if (s != null && s.length() > 0) {
             int x = s.length();
@@ -23,7 +23,7 @@ public class Problem6 {
     }
 
 
-    // returns string + reversed string, "abc" returns "abccba"
+    // returns string concatenated with reversed string, "abc" returns "abccba"
     public static String reflect(String s) {
         if (s == null || s.length() == 0) {
             return "";
@@ -33,7 +33,7 @@ public class Problem6 {
 
     }
 
-    // returns true if string contains char
+    // returns true if string contains char, otherwise false
     public static boolean contains(String s, char c) {
         if (s == null || s.length() == 0) return false;
         if (s.charAt(0) == c) return true;
@@ -41,41 +41,46 @@ public class Problem6 {
     }
 
 
-    // returns the number of char differences in two strings, from the left
+    // returns the number of char differences in two strings, read in left to right
     // assumed non-null inputs
     public static int numDiff(String s1, String s2) {
         // assume s1, s2 non-null
         if (s1 == null && s2 == null) return 0;
         if (s1 == null) return s2.length();
         if (s2 == null) return s1.length();
+
+        // based on char/string comparison, decide if we continue (with or without increment) or stop
         int x = 0;
-
-        // if (s1.length() == 0 && s2.length() == 0) {
-        //     return 0;
-        // }
-
         if (s1.length() == 0) {
-            // x++;
             return s2.length();
         } else if (s2.length() == 0) {
             return s1.length();
         } else if (s1.charAt(0) != s2.charAt(0)) {
             x++;
         }
+        
         return x + numDiff(s1.substring(1), s2.substring(1));
     }
 
     // returns the bitwise OR of two bit strings, assumed non-null inputs
     public static String bwOr(String b1, String b2) {
-        char c = '0';
 
+        // deal with exceptions just in case
+        if (b1 == null && b2 == null) return "";
+        if (b1 == null) return b2;
+        if (b2 == null) return b1;
+
+        char c = '0';
         if (b1.length() == 0) return b2;
         if (b2.length() == 0) return b1;
-        if (b1.charAt(b1.length()-1) == '1' || b2.charAt(b2.length() - 1) == '1') {
+        if (b1.charAt(b1.length() - 1) == '1' || b2.charAt(b2.length() - 1) == '1') {
             c = '1';
         }
-        return bwOr(b1.substring(0, b1.length()-1), b2.substring(0, b2.length()-1)) + c;
+        return bwOr(b1.substring(0, b1.length() - 1), b2.substring(0, b2.length() - 1)) + c;
     }
+
+    /* my first attempt at this used a helper function to keep track of the position
+    but i was able to write a version without it */
 
     // // returns index of first occurence of c within s, -1 if not present 
     // public static int indexOf(char c, String s) {
@@ -94,23 +99,21 @@ public class Problem6 {
 
     // returns index of char c in string s
     // no helper function! looks forward to see if the string ends and passes -1 all the way back if so
-    // otherwise returns an incrementing x
+    // otherwise returns an incrementing number
     public static int indexOf(char c, String s) {
         if (s == null || s.length() == 0) return -1;
         if (s.charAt(0) == c) return 0;
 
         int x = indexOf(c, s.substring(1));
 
-        if (x == -1) {
-            return -1;
-        } 
+        if (x == -1) return -1; 
         return 1 + x;
     }
 
 
     public static void main(String[] args) {
-        // int[] ax = {0, 1, 2, 3, 4, 5};
-        // System.out.println(sumSquares(ax, 0));
+        int[] ax = {0, 1, 2, 3, 4, 5};
+        System.out.println(sumSquares(ax, 3));
 
         // String s = "abdft";
         // char c = 'c';
@@ -133,8 +136,8 @@ public class Problem6 {
         // System.out.println(bwOr("10111", ""));
         // System.out.println(bwOr("", "0110"));
 
-        System.out.println(indexOf('b', "rabbit"));
-        System.out.println(indexOf('x', "rabbit"));
+        // System.out.println(indexOf('b', "rabbit"));
+        // System.out.println(indexOf('x', "rabbit"));
     
     }
 

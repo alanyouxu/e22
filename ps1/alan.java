@@ -1,5 +1,18 @@
 public class alan {
 
+
+    public static int io(String s, char c) {
+        // return index of c within s
+        if (s.length() == 0) return -1;
+        if (s.charAt(0) == c) return 0;
+
+        int x = io(s.substring(1), c);
+        if (x == -1) return -1;
+        return x + 1;
+
+        // return 1 + io(s.substring(1), c);
+    }
+
     static int foul;
 
     public static int mystery(int a, int b) {

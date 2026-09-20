@@ -169,7 +169,7 @@ public class ArrayBag {
         return str;
     }
 
-    // return amount of space left in ArrayBag
+    // return integer =  amount of spots left in ArrayBag
     public int roomLeft() {
         return this.items.length - this.numItems;
     }
@@ -182,12 +182,17 @@ public class ArrayBag {
         return false;
     }
 
+
+    // increases capacity of bag by the input integer
+    // creates new array with items from original bag, and points this.items to new array
+    // input must be non-negative
     public void increaseCapacity(int amount) {
         if (amount == 0) {
             return;
         } else if (amount < 0) {
             throw new IllegalArgumentException("Must increase by non-negative amount");
         }
+
         int new_bag_size = this.items.length + amount;
         Object[] new_bag = new Object[new_bag_size];
 
@@ -199,8 +204,8 @@ public class ArrayBag {
 
     }
 
-    // add items from another bag, returns false if there's no room
-    // , adds and returns true if there is
+    // add items from another bag to this.items, returns false if there's no room
+    // otherwise returns true
     public boolean addItems(ArrayBag other) {
         if (other == null) {
             throw new IllegalArgumentException("No bag found");
@@ -214,18 +219,21 @@ public class ArrayBag {
         return true;
     }
 
+
+    // returns an ArrayBag containing a single occurrence of any item found in both bags (this and other)
+    // bag size equal to the number of items in the bag with the smaller number of items
+    // bag size is 1 if the intersection is empty
+    // only
     public ArrayBag intersectionWith(ArrayBag other) {
         // throw error for null bag
         if (other == null) {
             throw new IllegalArgumentException("No bag found");
         }
 
-
-        // initialize bag size (3)
         int intersectBagSize = 1;
 
         if (this.numItems() == 0 || other.numItems() == 0) {
-//            intersectBagSize = 1;
+            // do nothing
         } else if (this.numItems() <= other.numItems()) {
             intersectBagSize = this.numItems();
         } else {
