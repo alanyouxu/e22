@@ -21,16 +21,19 @@ public class Problem7 {
 
 
     // returns a string trimmed of leading and trailing spaces
-    // " hello  " returns "hello"
+    // " hello world  " returns "hello world"
     public static String trim(String s) {
         // return null for null strings and empty for empty strings
-        if (s == null || s.length() == 0) return s;        
+        if (s == null || s.length() == 0) return s;      
+
         if (s.charAt(0) == ' ') {
             return trim(s.substring(1));
         }
+
         if (s.charAt(s.length() - 1) == ' '){
             return trim(s.substring(0, s.length() - 1));
         }
+        
         return s;
     }
 
