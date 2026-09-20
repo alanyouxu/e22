@@ -103,8 +103,8 @@ public class Problem6 {
 
         if (x == -1) {
             return -1;
-        } else { 
-            return 1 + x;}
+        } 
+        return 1 + x;
     }
 
 
