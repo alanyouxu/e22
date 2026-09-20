@@ -13,6 +13,7 @@ public class Problem6 {
 
 
     // "abc" prints "cba"
+    // prints string in reverse
     public static void printReverse(String s) {
         if (s != null && s.length() > 0) {
             int x = s.length();
@@ -22,7 +23,7 @@ public class Problem6 {
     }
 
 
-    // "abc" returns "abccba"
+    // returns string + reversed string, "abc" returns "abccba"
     public static String reflect(String s) {
         if (s == null || s.length() == 0) {
             return "";
@@ -39,6 +40,9 @@ public class Problem6 {
         return contains(s.substring(1), c);
     }
 
+
+    // returns the number of char differences in two strings, from the left
+    // assumed non-null inputs
     public static int numDiff(String s1, String s2) {
         // assume s1, s2 non-null
         if (s1 == null && s2 == null) return 0;
@@ -61,7 +65,7 @@ public class Problem6 {
         return x + numDiff(s1.substring(1), s2.substring(1));
     }
 
-
+    // returns the bitwise OR of two bit strings, assumed non-null inputs
     public static String bwOr(String b1, String b2) {
         char c = '0';
 
@@ -74,8 +78,15 @@ public class Problem6 {
     }
 
     public static int indexOf(char c, String s) {
+        // if (s == null || s.length() == 0) return -1;
+        // return 0;
+        return indexOfHelper(c, s, 0);
+    }
+
+    public static int indexOfHelper(char c, String s, int pos) {
         if (s == null || s.length() == 0) return -1;
-        return 0;
+        if (s.charAt(0) == c) return pos;
+        return indexOfHelper(c, s.substring(1), pos + 1);
     }
 
 
@@ -103,6 +114,9 @@ public class Problem6 {
         // System.out.println(bwOr("10100", "1000101"));
         // System.out.println(bwOr("10111", ""));
         // System.out.println(bwOr("", "0110"));
+
+        System.out.println(indexOf('b', "rabbit"));
+        System.out.println(indexOf('x', "rabbit"));
     
     }
 
