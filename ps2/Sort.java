@@ -11,7 +11,7 @@
  * altering the original array.
  */
 public class Sort {
-    public static final int NUM_ELEMENTS = 10;
+    public static final int NUM_ELEMENTS = 30;
     
     /*
      * swap - swap the values of arr[a] and arr[b].

@@ -12,6 +12,7 @@
  * whole is represented by storing a reference to the first node in
  * the linked list. Empty strings are represented using a value of null.
  */ 
+
 public class DNode {
     private char ch;
     private DNode prev;
@@ -77,8 +78,11 @@ public class DNode {
         System.out.println("before changes for 6-2: " + str);
 
         // put your answer for Problem 6-2 here
+
+        // assign the data for the inserted node first
         x.prev = n.prev;
         x.next = n;
+        // then change the relations of the existing nodes
         n.prev.next = x;
         n.prev = x;
 
