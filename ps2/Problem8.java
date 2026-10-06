@@ -35,6 +35,7 @@ public class Problem8 {
         }
 
         // copy the rest of the results in if any leftovers
+        // after one array is depleted
         while (i < l1) {
             result[k] = a1[i];
             i = race(a1, i);
