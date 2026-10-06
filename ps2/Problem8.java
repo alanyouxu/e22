@@ -6,7 +6,7 @@ public class Problem8 {
     public static int[] union(int[] a1, int[] a2) {
 
         if (a1 == null || a2 == null) {
-            throw new IllegalArgumentException("null arrays");
+            throw new IllegalArgumentException("One or both arrays are null");
         }
 
         Sort.mergeSort(a1); Sort.mergeSort(a2);
@@ -16,22 +16,21 @@ public class Problem8 {
         // indices into a1, a2, and result respectively
         int i = 0; int j = 0; int k = 0;
 
-        // check both arrays, advancing forward through dups
-        while (i < l1 && j < l2) { // if else structure guarantees just one pass per increment of k
+        // check both arrays, advancing forward through duplicates
+        while (i < l1 && j < l2) {
+            // if else structure guarantees just one pass per increment of k
             if (a1[i] < a2[j]) {
                 result[k] = a1[i];
                 i = race(a1, i);
-                k++;
             } else if (a1[i] > a2[j]) {
                 result[k] = a2[j];
                 j = race(a2, j);
-                k++;
             } else {
                 result[k] = a1[i];
                 i = race(a1, i);
                 j = race(a2, j);
-                k++;
             }
+            k++;
         }
 
         // copy the rest of the results in if any leftovers
@@ -52,6 +51,7 @@ public class Problem8 {
     }
 
     // race ahead until the next value that is different - helper function to dedupe
+    // do - while loop, we only run this after adding in an value so we don't need it
     private static int race(int[] arr, int index) {
         do { index++; } while (index < arr.length && arr[index] == arr[index - 1]);
         // System.out.println("raced to: " + i);
@@ -68,6 +68,18 @@ public class Problem8 {
         int[] y = {0,5,6,7,8,9,10};
         int[] result0 = union(x, y);
         System.out.println(Arrays.toString(result0));
+
+        int[] b1 = {10, 5, 7, 5, 9, 4};
+        int[] b2 = {7, 5, 15, 7, 7, 9, 10};
+        int[] resultb1 = union(b1, b2);
+        System.out.println(Arrays.toString(resultb1));
+
+        int[] b3 = {0, 2, -4, 6, 10, 8};
+        int[] b4 = {12, 0, -4, 8};
+        int[] resultb2 = union(b3, b4);
+        System.out.println(Arrays.toString(resultb2));
+
+
 
         int[] a1 = {10, 5, 7, 5, 9, 4};
         int[] a2 = {7, 5, 15, 7, 7, 9, 10};
