@@ -165,17 +165,36 @@ public class StringNode {
     /**
      * copy - returns a copy of the given linked-list string
      */
+    // public static StringNode copy(StringNode str) {
+    //     if (str == null) {
+    //         return null;
+    //     }
+
+    //     // make a recursive call to copy the rest of the list
+    //     StringNode copyRest = copy(str.next);
+           
+    //     // create and return a copy of the first node, 
+    //     // with its next field pointing to the copy of the rest
+    //     return new StringNode(str.ch, copyRest);
+    // }
+
+
     public static StringNode copy(StringNode str) {
-        if (str == null) {
-            return null;
+        if (str == null) return null;
+
+        StringNode copied = new StringNode(str.ch, str.next);
+        StringNode curr = copied;
+        StringNode trav;
+
+        while (str.next != null) {
+            trav = new StringNode(str.next.ch, str.next.next);
+            curr.next = trav;
+            curr = curr.next;
+            str = str.next;
         }
 
-        // make a recursive call to copy the rest of the list
-        StringNode copyRest = copy(str.next);
-           
-        // create and return a copy of the first node, 
-        // with its next field pointing to the copy of the rest
-        return new StringNode(str.ch, copyRest);
+        return copied;
+
     }
 
     /**
@@ -430,44 +449,44 @@ public class StringNode {
         
         // toUpperCase
         StringNode str = StringNode.convert("fine");
-        // System.out.print("Here's a string: "); 
-        // System.out.println(str);    // implicit toString call
-        // System.out.print("Here it is in upper-case letters: "); 
-        // StringNode.toUpperCase(str);
-        // System.out.println(str);
+        System.out.print("Here's a string: "); 
+        System.out.println(str);    // implicit toString call
+        System.out.print("Here it is in upper-case letters: "); 
+        StringNode.toUpperCase(str);
+        System.out.println(str);
         
         // copy, charAt and deleteChar
         System.out.print("\nEnter a string: ");
         String s = in.nextLine();
         StringNode str1 = StringNode.convert(s);
-        // int n = -1;
-        // while (n < 0) {
-        //     System.out.print("What # character (>= 0)? ");
-        //     n = in.nextInt();
-        //     in.nextLine();
-        // }
-        // StringNode copyStr1 = StringNode.copy(str1);
-        // try {
-        //     char c = StringNode.charAt(str1, n);
-        //     System.out.println("That character is: " + c);
-        //     str1 = StringNode.deleteChar(str1, n);
-        //     System.out.print("Deleting it gives: ");
-        //     StringNode.print(str1);
-        // } catch (IllegalArgumentException e) {
-        //     System.out.println("The string is too short.");
-        // }
+        int n = -1;
+        while (n < 0) {
+            System.out.print("What # character (>= 0)? ");
+            n = in.nextInt();
+            in.nextLine();
+        }
+        StringNode copyStr1 = StringNode.copy(str1);
+        try {
+            char c = StringNode.charAt(str1, n);
+            System.out.println("That character is: " + c);
+            str1 = StringNode.deleteChar(str1, n);
+            System.out.print("Deleting it gives: ");
+            StringNode.print(str1);
+        } catch (IllegalArgumentException e) {
+            System.out.println("The string is too short.");
+        }
 
-        // // The copy should be unchanged!
-        // str1 = copyStr1;
-        // System.out.print("\nReturning to the unchanged copy: ");
-        // System.out.println(copyStr1);
+        // The copy should be unchanged!
+        str1 = copyStr1;
+        System.out.print("\nReturning to the unchanged copy: ");
+        System.out.println(copyStr1);
         
         // compareAlpha
-        // System.out.print("\nType another string: ");
-        // s = in.nextLine();
-        // StringNode str2 = StringNode.convert(s);
-        // System.out.print("comparing " + str1 + " and " + str2 + " gives: ");
-        // System.out.println(StringNode.compareAlpha(str1, str2));   
+        System.out.print("\nType another string: ");
+        s = in.nextLine();
+        StringNode str2 = StringNode.convert(s);
+        System.out.print("comparing " + str1 + " and " + str2 + " gives: ");
+        System.out.println(StringNode.compareAlpha(str1, str2));   
         
         // insertBefore
         System.out.print("\nWhat character to insert? ");
