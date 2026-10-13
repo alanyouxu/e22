@@ -38,12 +38,13 @@ public class Problem7 {
     }
 
     public static void main(String[] args) {
-        System.out.println(nthIndexOf(1, 'a', "banana"));
-        System.out.println(nthIndexOf(2, 'a', "banana"));
-        System.out.println(nthIndexOf(3, 'a', "banana"));
+        // System.out.println(nthIndexOf(1, 'a', "banana"));
+        // System.out.println(nthIndexOf(2, 'a', "banana"));
+        // System.out.println(nthIndexOf(3, 'a', "banana"));
+        // System.out.println(nthIndexOf(4, 'a', "banana"));
+        // System.out.println(nthIndexOf(4, 'a', ""));
         System.out.println(nthIndexOf(4, 'a', "banana"));
-        System.out.println(nthIndexOf(4, 'a', ""));
-        System.out.println(nthIndexOf(4, 'a', "banana"));
+        System.out.println(nthIndexOf(5, 's', "mississippi"));
         // String s = trim("    hello world haha     ");
         // System.out.println(s);
         // System.out.println(s.length());
