@@ -474,8 +474,8 @@ public class StringNode {
     public static int lastIndexOf(StringNode str, char ch) {
         // use recursion to return last occurrenc of ch in str
         // return -1 if not present
-        int len = length(str);
-        StringNode rev = copy(str);
+        // int len = length(str);
+        // StringNode rev = copy(str);
         return 0;
 
 
