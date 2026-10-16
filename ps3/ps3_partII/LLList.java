@@ -148,6 +148,26 @@ public class LLList implements List {
         length--;
         return removed;
     }
+
+    public void rotate(int k) {
+        // how do we do this without blowing up the time ? probably by finding the last node first;
+        if (k < 0) throw new IllegalArgumentException();
+        k = k % this.length;
+        if (k == 0 || k == this.length || this.length == 0) return;
+
+        // go to the length - k (-1)th item in the list, declare it the new head, 
+        // go to the end of the list, put its tail where the head originally was
+
+        Node newTail = this.getNode(this.length - k - 1); // where the original list will end
+        Node newHead = newTail.next; // the new head of our list
+        Node oldTail = this.getNode(this.length - 1); // the old end of list
+
+        Node oldHead = this.head.next; // head of list (after dummy head)
+
+        this.head.next = newHead; // assign dummy head to point to the new (true) Head
+        oldTail.next = oldHead; // tack the old (true) head to the tail of the old list
+        newTail.next = null; // null out the new end of the list so we don't go in a circle
+    }
     
     /*
      * toString - converts the list into a String of the form 
@@ -206,4 +226,24 @@ public class LLList implements List {
             return item;
         }
     }
+
+    public static void main(String[]args) {
+        String[] letters3 = {"a", "b", "c", "d", "e", "f"};
+        LLList list3 = new LLList(letters3);
+        System.out.println(list3);
+        list3.rotate(10);
+        System.out.println(list3);
+        list3.rotate(1);
+        System.out.println(list3);
+        list3.rotate(2);
+        System.out.println(list3);
+        list3.rotate(3);
+        System.out.println(list3);
+        list3.rotate(4);
+        System.out.println(list3);
+        list3.rotate(5);
+        System.out.println(list3);
+    }
+
+
 }

@@ -109,6 +109,13 @@ public class ArrayList implements List {
         length--;
         return removed;
     }
+
+    public void rotate(int k) {
+        if (k < 0) throw new IllegalArgumentException();
+        k = k % this.length;
+
+        
+    }
     
     /*
      * toString - converts the list into a String of the form 
@@ -134,5 +141,14 @@ public class ArrayList implements List {
     public ListIterator iterator() {
         // still needs to be implemented
         return null;
+    }
+
+
+    public static void main(String[] args) {
+        String[] letters3 = {"a", "b", "c", "d", "e", "f"};
+        ArrayList list3 = new ArrayList(letters3);
+        System.out.println(list3);
+        list3.rotate(4);
+        System.out.println(list3);
     }
 }
