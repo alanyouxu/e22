@@ -473,29 +473,40 @@ public class StringNode {
 
     public static int lastIndexOf(StringNode str, char ch) {
         // use recursion to return last occurrenc of ch in str
-        // return -1 if not present
-        // int len = length(str);
-        // StringNode rev = copy(str);
-        return 0;
 
+        if (str == null) return -1; // base case
 
+        int x = lastIndexOf(str.next, ch); // race to last item
+
+        if (x != -1) { // already matched, just increment and go back
+            return 1 + x;
+        } else if (str.ch == ch) { // haven't matched, just matched, set position 0
+            return 0;
+        } else { // haven't matched and doesn't match 
+            return -1;
+        }
     }
               
     public static void main(String[] args) throws IOException {
-        StringNode str = StringNode.convert("123456789");
-        StringNode rev;
+        // StringNode str = StringNode.convert("123456789");
+        // StringNode rev;
 
 
-        System.out.println("string:");
-        StringNode.print(str);
-        System.out.println("");
+        // System.out.println("string:");
+        // StringNode.print(str);
+        // System.out.println("");
 
-        rev = reverseInPlace(str);
-        System.out.println("");
+        // rev = reverseInPlace(str);
+        // System.out.println("");
         
-        System.out.println("reversed:");
-        StringNode.print(rev);
-        System.out.println("");
+        // System.out.println("reversed:");
+        // StringNode.print(rev);
+        // System.out.println("");
+
+        StringNode s4 = StringNode.convert("singing");
+        System.out.println(StringNode.lastIndexOf(s4, 'n'));
+        System.out.println(StringNode.lastIndexOf(s4, 'i'));
+        System.out.println(StringNode.lastIndexOf(s4, 'x'));
 
         
         // Scanner in = new Scanner(System.in);
