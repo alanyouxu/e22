@@ -113,8 +113,18 @@ public class ArrayList implements List {
     public void rotate(int k) {
         if (k < 0) throw new IllegalArgumentException();
         k = k % this.length;
+        if (this.length == 0 || k == 0) return;
 
-        
+        Object[] newItems = new Object[this.length];
+
+        // single for-loop to place everything in its new position in new array
+        for (int i = 0; i < this.length; i++) {
+            newItems[(i + k) % this.length] = this.items[i];
+        }
+
+        // reassign this.items
+        this.items = newItems;
+
     }
     
     /*
@@ -148,7 +158,13 @@ public class ArrayList implements List {
         String[] letters3 = {"a", "b", "c", "d", "e", "f"};
         ArrayList list3 = new ArrayList(letters3);
         System.out.println(list3);
-        list3.rotate(4);
+        // list3.rotate(1);
+        // System.out.println(list3);
+        list3.rotate(2);
         System.out.println(list3);
+        // list3.rotate(3);
+        // System.out.println(list3);
+        // list3.rotate(4);
+        // System.out.println(list3);
     }
 }

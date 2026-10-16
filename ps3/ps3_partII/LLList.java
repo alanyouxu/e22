@@ -230,18 +230,21 @@ public class LLList implements List {
     public static void main(String[]args) {
         String[] letters3 = {"a", "b", "c", "d", "e", "f"};
         LLList list3 = new LLList(letters3);
-        System.out.println(list3);
-        list3.rotate(10);
+
         System.out.println(list3);
         list3.rotate(1);
         System.out.println(list3);
-        list3.rotate(2);
+        list3.rotate(1);
         System.out.println(list3);
-        list3.rotate(3);
+        list3.rotate(1);
         System.out.println(list3);
-        list3.rotate(4);
+        list3.rotate(1);
         System.out.println(list3);
-        list3.rotate(5);
+        list3.rotate(1);
+        System.out.println(list3);
+        list3.rotate(1);
+        System.out.println(list3);
+        list3.rotate(1);
         System.out.println(list3);
     }
 
