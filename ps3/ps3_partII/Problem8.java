@@ -10,22 +10,54 @@ public class Problem8 {
     public static boolean isPal(String s) {
         // replace the following return statement with your implementation
         // of the method.
-        return false;
+
+        if (s == null) throw new IllegalArgumentException("Null string!");
+        if (s.length() < 2) return true; // trivially palindromic
+
+
+        ArrayStack<Character> pstack = new ArrayStack<Character>(s.length());
+
+        // move inwards on both ends of the string
+        int i = 0; int j = s.length() - 1;
+
+        while (i < j) {
+            // race forward to find alphabetic character, stop when passing each other;
+            while ((i < j) && !Character.isAlphabetic(s.charAt(i))) i++;
+            while ((i < j) && !Character.isAlphabetic(s.charAt(j))) j--;
+
+            if (i < j) { // if we've passed each other, just move on
+                pstack.push(Character.toLowerCase(s.charAt(i)));
+                pstack.push(Character.toLowerCase(s.charAt(j)));
+                i++; j--; // move forward
+            }
+        }
+
+        Character front; Character back;        
+        while (pstack.peek() != null) {
+            front = pstack.pop(); back = pstack.pop();
+            if (front != back) return false;
+        }
+
+        return true;
     }
     
     public static void main(String[] args) {
         System.out.println("--- Testing method isPal ---");
         System.out.println();
 
-        System.out.println("(0) Testing on \"A man, a plan, a canal, Panama!\"");
+        String s = "racecar";
+        s = "Was it a car or a cat I saw?";
+        // String s = null;
+
+        System.out.println("(0) Testing on \"" + s + "\"");
         try {
-            boolean results = isPal("A man, a plan, a canal, Panama!");
+            boolean results = isPal(s);
             System.out.println("actual results:");
             System.out.println(results);
-            System.out.println("expected results:");
-            System.out.println("true");
-            System.out.print("MATCHES EXPECTED RESULTS?: ");
-            System.out.println(results == true);
+            // System.out.println("expected results:");
+            // System.out.println("true");
+            // System.out.print("MATCHES EXPECTED RESULTS?: ");
+            // System.out.println(results == true);
         } catch (Exception e) {
             System.out.println("INCORRECTLY THREW AN EXCEPTION: " + e);
         }

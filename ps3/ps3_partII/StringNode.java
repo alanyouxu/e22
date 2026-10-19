@@ -472,10 +472,9 @@ public class StringNode {
 
 
     public static int lastIndexOf(StringNode str, char ch) {
-        // use recursion to return last occurrenc of ch in str
+        // use recursion to return last occurrence of ch in str
 
         if (str == null) return -1; // base case
-
         int x = lastIndexOf(str.next, ch); // race to last item
 
         if (x != -1) { // already matched, just increment and go back
