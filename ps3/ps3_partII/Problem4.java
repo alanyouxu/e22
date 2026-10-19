@@ -9,6 +9,7 @@ public class Problem4 {
         if (stack == null || item == null || stack.isEmpty()) return false;
 
         // special case so we don't have to pull out ALL items
+        // pre-assign curr so we can use it in our next if-statement
         curr = stack.pop();
         orig.push(curr);
 

@@ -8,12 +8,8 @@
    
 public class Problem8 {
     public static boolean isPal(String s) {
-        // replace the following return statement with your implementation
-        // of the method.
-
         if (s == null) throw new IllegalArgumentException("Null string!");
         if (s.length() < 2) return true; // trivially palindromic
-
 
         LLStack<Character> pstack = new LLStack<Character>();
 
@@ -21,21 +17,26 @@ public class Problem8 {
         int i = 0; int j = s.length() - 1;
 
         while (i < j) {
-            // race forward to find alphabetic character, stop when passing each other;
+            // race to center to find alphabetic character, stop when passing each other;
             while ((i < j) && !Character.isAlphabetic(s.charAt(i))) i++;
             while ((i < j) && !Character.isAlphabetic(s.charAt(j))) j--;
 
             if (i < j) { // if we've passed each other, just move on
                 pstack.push(Character.toLowerCase(s.charAt(i)));
                 pstack.push(Character.toLowerCase(s.charAt(j)));
-                i++; j--; // move forward
+                i++; j--; // move toward middle
             } // note this method guarantees an EVEN number in our ArrayStack;
         }
 
-        Character front; Character back;        
+        // pull out each pair from the stack and compare
+        Character front; 
+        Character back;        
+
         while (pstack.peek() != null) { // see if there are more to check
-            front = pstack.pop(); back = pstack.pop();
-            if (front != back) return false; // no cases for null, as we guaranteed non-null values
+            front = pstack.pop(); 
+            back = pstack.pop();
+            if (front != back) return false; 
+            // no cases for null items in LLList, as we guaranteed non-null values
         }
 
         return true;

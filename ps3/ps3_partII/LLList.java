@@ -150,19 +150,19 @@ public class LLList implements List {
     }
 
     public void rotate(int k) {
-        // how do we do this without blowing up the time ? probably by finding the last node first;
-        if (k < 0) throw new IllegalArgumentException();
-        k = k % this.length;
-        if (k == 0 || k == this.length || this.length == 0) return;
+        if (k < 0) throw new IllegalArgumentException(); 
+        if (this.length <= 1) return; // check if list is empty / single element
+        k = k % this.length; // this.length guaranteed in Z+
+        if (k == 0) return;
 
         // go to the length - k (-1)th item in the list, declare it the new head, 
         // go to the end of the list, put its tail where the head originally was
 
         Node newTail = this.getNode(this.length - k - 1); // where the original list will end
         Node newHead = newTail.next; // the new head of our list
-        Node oldTail = this.getNode(this.length - 1); // the old end of list
+        Node oldTail = this.getNode(this.length - 1); // the end of original list
 
-        Node oldHead = this.head.next; // head of list (after dummy head)
+        Node oldHead = this.head.next; // head of original list (after dummy head)
 
         this.head.next = newHead; // assign dummy head to point to the new (true) Head
         oldTail.next = oldHead; // tack the old (true) head to the tail of the old list

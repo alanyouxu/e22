@@ -112,15 +112,16 @@ public class ArrayList implements List {
 
     public void rotate(int k) {
         if (k < 0) throw new IllegalArgumentException();
-        k = k % this.length;
-        if (this.length == 0 || k == 0) return;
+        if (this.length <= 1) return; // check first if list is empty or single element
+        k = k % this.length; // 
+        if (k == 0) return;
 
         Object[] newItems = new Object[this.length];
 
         // single for-loop to place everything in its new position in new array
         for (int i = 0; i < this.length; i++) {
             newItems[(i + k) % this.length] = this.items[i];
-        }
+        } // uses O(n) memory, for-loop is also O(n) here, constant inside work
 
         // reassign this.items
         this.items = newItems;
@@ -160,7 +161,7 @@ public class ArrayList implements List {
         System.out.println(list3);
         // list3.rotate(1);
         // System.out.println(list3);
-        list3.rotate(2);
+        list3.rotate(5);
         System.out.println(list3);
         // list3.rotate(3);
         // System.out.println(list3);
