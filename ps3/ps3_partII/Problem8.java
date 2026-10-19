@@ -33,9 +33,9 @@ public class Problem8 {
         }
 
         Character front; Character back;        
-        while (pstack.peek() != null) {
+        while (pstack.peek() != null) { // see if there are more to check
             front = pstack.pop(); back = pstack.pop();
-            if (front != back) return false;
+            if (front != back) return false; // no cases for null, as we guaranteed non-null values
         }
 
         return true;
@@ -46,7 +46,7 @@ public class Problem8 {
         System.out.println();
 
         String s = "racecar";
-        s = "Was it a car or a cat I saw?";
+        s = "Was it a car o//////////r a cat I saw?";
         // String s = null;
 
         System.out.println("(0) Testing on \"" + s + "\"");

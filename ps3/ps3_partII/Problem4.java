@@ -6,7 +6,7 @@ public class Problem4 {
         LLStack<Object> orig = new LLStack<Object>();
 
         Object curr;
-        if (stack.isEmpty()) return false;
+        if (stack == null || item == null || stack.isEmpty()) return false;
 
         // special case so we don't have to pull out ALL items
         curr = stack.pop();
@@ -31,7 +31,7 @@ public class Problem4 {
         LLQueue<Object> orig = new LLQueue<Object>(); // don't know how long queue will be
 
         // same principle as last time
-        if (queue.isEmpty()) return false;
+        if (queue == null || item == null || queue.isEmpty()) return false;
 
         boolean rvalue = false;
         Object curr;
@@ -72,7 +72,7 @@ public class Problem4 {
 
         // while (!xu.isEmpty()) System.out.println(xu.remove());
 
-        System.out.println(containsQueue(xu, "abbb"));
+        System.out.println(containsQueue(xu, "a b"));
 
         while (!xu.isEmpty()) System.out.println(xu.remove());
 

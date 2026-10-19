@@ -74,14 +74,14 @@ public class StringNode {
     public static char charAt(StringNode str, int i) {
         if (str == null || i < 0) {
             throw new IllegalArgumentException();
-        }
+        } // error check
 
         while (str != null && i > 0) {
             str = str.next;
             i--;
-        }
+        } // race to ith position
 
-        if (i > 0) {
+        if (i > 0) { // means i is greater than length of string - 1
             throw new IllegalArgumentException();
         }
     
@@ -283,7 +283,7 @@ public class StringNode {
             return newNode;
         }
 
-        if (str.next == null) { // base case after edge cases
+        if (str.next == null) { // base case after edge cases, reached end
             str.next = newNode;
         } else {
             if (str.next.ch == beforeChar) { // insert here
