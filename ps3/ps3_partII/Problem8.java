@@ -15,7 +15,7 @@ public class Problem8 {
         if (s.length() < 2) return true; // trivially palindromic
 
 
-        ArrayStack<Character> pstack = new ArrayStack<Character>(s.length());
+        LLStack<Character> pstack = new LLStack<Character>();
 
         // move inwards on both ends of the string
         int i = 0; int j = s.length() - 1;
@@ -29,7 +29,7 @@ public class Problem8 {
                 pstack.push(Character.toLowerCase(s.charAt(i)));
                 pstack.push(Character.toLowerCase(s.charAt(j)));
                 i++; j--; // move forward
-            }
+            } // note this method guarantees an EVEN number in our ArrayStack;
         }
 
         Character front; Character back;        
