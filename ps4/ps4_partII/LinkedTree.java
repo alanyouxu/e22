@@ -411,17 +411,30 @@ public class LinkedTree {
      * Note: For the purposes of this problem, we assume that
      * all of the keys in the tree are positive.
      */
+    // private static int maxLessThanInTree(Node root, int t) {
+    //     if (root == null) {
+    //         return -1;
+    //     } else {
+    //         int maxInLeft = maxLessThanInTree(root.left, t);
+    //         int maxInRight = maxLessThanInTree(root.right, t);
+    //         int maxInSubtrees = Math.max(maxInLeft, maxInRight);
+    //         if (root.key < t) {
+    //             return Math.max(root.key, maxInSubtrees);
+    //         } else {
+    //             return maxInSubtrees;
+    //         }
+    //     }
+    // }
+
     private static int maxLessThanInTree(Node root, int t) {
         if (root == null) {
             return -1;
         } else {
-            int maxInLeft = maxLessThanInTree(root.left, t);
-            int maxInRight = maxLessThanInTree(root.right, t);
-            int maxInSubtrees = Math.max(maxInLeft, maxInRight);
             if (root.key < t) {
-                return Math.max(root.key, maxInSubtrees);
+                return Math.max(root.key, maxLessThanInTree(root.right, t));
             } else {
-                return maxInSubtrees;
+                // only go into left tree
+                return maxLessThanInTree(root.left, t);
             }
         }
     }
