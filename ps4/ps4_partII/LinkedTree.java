@@ -586,5 +586,13 @@ public class LinkedTree {
         tree5.levelOrderPrint();
         System.out.println("\ndeleteMin: " + tree5.deleteMin());
         tree5.levelOrderPrint();
+
+
+        LinkedTreeIterator iter = tree3.preorderIterator();
+        while (iter.hasNext()) {
+            int key = iter.next();
+            System.out.println(key);
+            // do something with key
+        }
     }
 }
