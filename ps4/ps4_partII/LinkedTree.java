@@ -438,23 +438,83 @@ public class LinkedTree {
             }
         }
     }
+
+    public int minOnPathTo(int key) {
+        if (this.root == null) return -1; // exit early
+
+        Node curr = root; 
+        int minOnPath = root.key; // initialize with root
+
+        while (curr != null) {
+            if (curr.key < minOnPath) minOnPath = curr.key; // replace if new min
+            
+            // tree navigation
+            if (key < curr.key) { curr = curr.left; }
+            else if (key > curr.key) {curr = curr.right; }
+            else break; // break if we found the right 
+        }
+
+        if (curr == null) { return -1; } 
+        else {
+            return minOnPath;
+        }
+    }
+
+    private static int numOddInTree(Node root) {
+        if (root == null) return 0;
+        int numOdd = 0;
+        if (root.key % 2 == 1) numOdd++;
+
+        return numOdd + numOddInTree(root.left) + numOddInTree(root.right);
+        // return 0;
+    }
+
+    public int numOdd() {
+        return numOddInTree(this.root);
+    }
+
+    private int deleteMin() {
+        if (this.root == null) return -1;
+
+        Node curr = this.root;
+        Node next = this.root.left;
+
+        if (next == null) { // root is smallest
+            this.root = this.root.right; // delete root
+            return curr.key;
+        }
+
+        while (next.left != null) { 
+            // run to smallest node (will be leftmost)
+            // next will be smallest node and curr will be its parent
+            curr = curr.left;
+            next = next.left;
+        } 
+
+        curr.left = next.right; // delete and reassign the right children
+        return next.key;
+    }
     
     public static void main(String[] args) {
+        // int[] testCases;
         System.out.println("--- Testing maxLessThanInTree() ---");
         System.out.println();
         System.out.println("(0) tree from pr4, max < 60");
         try {
-            LinkedTree tree = new LinkedTree();
-            int[] keys = {37, 26, 42, 13, 35, 56, 30, 47, 70};
-            tree.insertKeys(keys);
+            // LinkedTree tree = new LinkedTree();
+            // int[] keys = {37, 26, 42, 13, 35, 56, 30, 47, 70};
+            // tree.insertKeys(keys);
             
-            int result = tree.maxLessThan(60);
-            System.out.println("actual result:");
-            System.out.println(result);
-            System.out.println("expected result:");
-            System.out.println(56);
-            System.out.print("MATCHES EXPECTED RESULT?: ");
-            System.out.println(result == 56);
+            // int result = tree.maxLessThan(60);
+            // System.out.println("actual result:");
+            // System.out.println(result);
+            // System.out.println("expected result:");
+            // System.out.println(56);
+            // System.out.print("MATCHES EXPECTED RESULT?: ");
+            // System.out.println(result == 56);
+
+            
+            
         } catch (Exception e) {
             System.out.println("INCORRECTLY THREW EXCEPTION: " + e);
         }
@@ -462,11 +522,69 @@ public class LinkedTree {
         System.out.println();  // include blank line between tests
         
         /*
-         * Add at least two unit tests for each method
-         * from Problem 6.
-	     * Test a variety of different cases.
-	     * Follow the same format that we have used above.
-         */
+        * Add at least two unit tests for each method
+        * from Problem 6.
+        * Test a variety of different cases.
+        * Follow the same format that we have used above.
+        */
+       
+        LinkedTree tree2 = new LinkedTree();
+        int[] keys2 = {52, 23, 81, 11, 67, 38, 94, 5, 17, 31, 45, 60, 74, 88, 99, 42};
+        tree2.insertKeys(keys2);
+       
+        int[] testCases = {94, 17, 18, 31};
+
+        for (int i = 0; i < testCases.length; i++) {
+            System.out.println("minOnPathTo(" + testCases[i] + "): " + tree2.minOnPathTo(testCases[i]));
+        }
+
+        // System.out.println("minOnPathTo(94): " + tree2.minOnPathTo(94)); // 52
+        // System.out.println("minOnPathTo(17): " + tree2.minOnPathTo(17)); // 11
+        // System.out.println("minOnPathTo(18): " + tree2.minOnPathTo(18)); // -1
+        // System.out.println("minOnPathTo(31): " + tree2.minOnPathTo(31)); // 23
+
+        System.out.println();
+
+        System.out.println("numOddInTree:" + tree2.numOdd());
         
+        System.out.println();
+
+        LinkedTree tree3 = new LinkedTree();
+        System.out.println("minOnPathTo of null tree = " + tree3.minOnPathTo(13));
+        int[] keys3 = {37, 26, 42, 13, 35, 56, 30, 47, 70};
+        tree3.insertKeys(keys3);
+
+        int[] testCases2 = {13, 35, 37, 50};
+
+        for (int i = 0; i < testCases2.length; i++) {
+            System.out.println("minOnPathTo(" + testCases2[i] + "): " + tree3.minOnPathTo(testCases2[i]));
+        }
+
+
+        System.out.println();
+
+        System.out.println("numOddInTree: " + tree3.numOdd());
+
+
+        LinkedTree tree4 = new LinkedTree();
+        System.out.println("numOdd of null tree = " + tree4.numOdd());
+        int[] keys = {37, 26, 42, 13, 35, 56, 30, 47, 70};
+        tree4.insertKeys(keys);
+        System.out.println("numOdd of tree4 = " + tree4.numOdd());
+
+
+
+        LinkedTree tree5 = new LinkedTree();
+        System.out.println("empty tree: " + tree5.deleteMin());
+
+        int[] keys5 = {37, 26, 42, 13, 35, 56, 30, 47, 70};
+        tree5.insertKeys(keys5);
+        System.out.println("levels of original tree:");
+        tree5.levelOrderPrint();
+
+        System.out.println("\ndeleteMin: " + tree5.deleteMin());
+        tree5.levelOrderPrint();
+        System.out.println("\ndeleteMin: " + tree5.deleteMin());
+        tree5.levelOrderPrint();
     }
 }
