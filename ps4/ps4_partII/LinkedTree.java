@@ -841,6 +841,10 @@ public class LinkedTree {
             tree4.deleteMin();
             System.out.print("after deleting min from tree4: ");
             System.out.println(tree3.isomorphicTo(tree4));
+
+            tree3.insert(23, "value for 23"); tree4.insert(22, "value for 23");
+            System.out.print("after adding a left child and right child to tree3 and 4 respectively: ");
+            System.out.println(tree3.isomorphicTo(tree4));
         } catch (Exception e) {
             System.out.println("INCORRECTLY THREW EXCEPTION: " + e);
         }
