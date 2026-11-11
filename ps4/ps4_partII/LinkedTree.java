@@ -393,6 +393,60 @@ public class LinkedTree {
             return key;
         }
     }  
+
+    public LinkedTreeIterator PostorderIterator() {
+        return new PostorderIterator();
+    }
+
+    private Node postHelper(Node nextNode) {
+        while (nextNode.left != null || nextNode.right != null) {
+            if (nextNode.left != null) nextNode = nextNode.left;
+            else nextNode = nextNode.right; 
+        }
+        return nextNode;
+    }
+
+    // @SuppressWarnings("unused")
+    private class PostorderIterator implements LinkedTreeIterator {
+        private Node nextNode = root;
+
+        private PostorderIterator() {
+            // traverse to first node
+            nextNode = postHelper(nextNode);
+        }
+
+        public boolean hasNext() {
+            return (nextNode != null);
+        }
+
+        public int next() {
+            if (nextNode == null) throw new NoSuchElementException();
+
+            int key = nextNode.key;
+
+            Node child = nextNode;
+            Node parent = nextNode.parent; // could be null
+
+            
+            if (parent == null) {
+                nextNode = null; // done
+            }
+            else if (child == parent.right || parent.right == null) {
+                nextNode = nextNode.parent; // head upwards
+            } else {
+                nextNode = postHelper(parent.right);
+            }
+
+            
+            return key;
+        }
+        
+    }
+    
+    @SuppressWarnings("unused")
+    private static boolean isomorphic(Node root1, Node root2) {
+        return true;
+    }
     
     /*
      * "wrapper method" for the recursive maxLessThanInTree()
@@ -473,6 +527,8 @@ public class LinkedTree {
         return numOddInTree(this.root);
     }
 
+
+    // @SuppressWarnings("unused")
     private int deleteMin() {
         if (this.root == null) return -1;
 
@@ -481,6 +537,7 @@ public class LinkedTree {
 
         if (next == null) { // root is smallest
             this.root = this.root.right; // delete root
+            this.root.parent = null;
             return curr.key;
         }
 
@@ -492,28 +549,29 @@ public class LinkedTree {
         } 
 
         curr.left = next.right; // delete and reassign the right children
+        next.right.parent = curr;
         return next.key;
     }
     
     public static void main(String[] args) {
         // int[] testCases;
+
+
         System.out.println("--- Testing maxLessThanInTree() ---");
         System.out.println();
         System.out.println("(0) tree from pr4, max < 60");
         try {
-            // LinkedTree tree = new LinkedTree();
-            // int[] keys = {37, 26, 42, 13, 35, 56, 30, 47, 70};
-            // tree.insertKeys(keys);
+            LinkedTree tree = new LinkedTree();
+            int[] keys = {37, 26, 42, 13, 35, 56, 30, 47, 70};
+            tree.insertKeys(keys);
             
-            // int result = tree.maxLessThan(60);
-            // System.out.println("actual result:");
-            // System.out.println(result);
-            // System.out.println("expected result:");
-            // System.out.println(56);
-            // System.out.print("MATCHES EXPECTED RESULT?: ");
-            // System.out.println(result == 56);
-
-            
+            int result = tree.maxLessThan(60);
+            System.out.println("actual result:");
+            System.out.println(result);
+            System.out.println("expected result:");
+            System.out.println(56);
+            System.out.print("MATCHES EXPECTED RESULT?: ");
+            System.out.println(result == 56);
             
         } catch (Exception e) {
             System.out.println("INCORRECTLY THREW EXCEPTION: " + e);
@@ -527,72 +585,97 @@ public class LinkedTree {
         * Test a variety of different cases.
         * Follow the same format that we have used above.
         */
-       
-        LinkedTree tree2 = new LinkedTree();
-        int[] keys2 = {52, 23, 81, 11, 67, 38, 94, 5, 17, 31, 45, 60, 74, 88, 99, 42};
-        tree2.insertKeys(keys2);
-       
-        int[] testCases = {94, 17, 18, 31};
 
-        for (int i = 0; i < testCases.length; i++) {
-            System.out.println("minOnPathTo(" + testCases[i] + "): " + tree2.minOnPathTo(testCases[i]));
-        }
+        System.out.println("--- Testing minOnPathTo() ---");
+        System.out.println();
+        System.out.println("New tree, ");
+       
+        // LinkedTree tree2 = new LinkedTree();
+        // int[] keys2 = {52, 23, 81, 11, 67, 38, 94, 5, 17, 31, 45, 60, 74, 88, 99, 42};
+        // tree2.insertKeys(keys2);
+       
+        // int[] testCases = {94, 17, 18, 31};
+
+        // for (int i = 0; i < testCases.length; i++) {
+        //     System.out.println("minOnPathTo(" + testCases[i] + "): " + tree2.minOnPathTo(testCases[i]));
+        // }
 
         // System.out.println("minOnPathTo(94): " + tree2.minOnPathTo(94)); // 52
         // System.out.println("minOnPathTo(17): " + tree2.minOnPathTo(17)); // 11
         // System.out.println("minOnPathTo(18): " + tree2.minOnPathTo(18)); // -1
         // System.out.println("minOnPathTo(31): " + tree2.minOnPathTo(31)); // 23
 
-        System.out.println();
+        // System.out.println();
 
-        System.out.println("numOddInTree:" + tree2.numOdd());
+        // System.out.println("numOddInTree:" + tree2.numOdd());
         
-        System.out.println();
+        // System.out.println();
 
+        // System.out.println("minOnPathTo of null tree = " + tree3.minOnPathTo(13));
         LinkedTree tree3 = new LinkedTree();
-        System.out.println("minOnPathTo of null tree = " + tree3.minOnPathTo(13));
         int[] keys3 = {37, 26, 42, 13, 35, 56, 30, 47, 70};
         tree3.insertKeys(keys3);
 
-        int[] testCases2 = {13, 35, 37, 50};
+        // int[] testCases2 = {13, 35, 37, 50};
 
-        for (int i = 0; i < testCases2.length; i++) {
-            System.out.println("minOnPathTo(" + testCases2[i] + "): " + tree3.minOnPathTo(testCases2[i]));
-        }
+        // for (int i = 0; i < testCases2.length; i++) {
+        //     System.out.println("minOnPathTo(" + testCases2[i] + "): " + tree3.minOnPathTo(testCases2[i]));
+        // }
 
 
+        // System.out.println();
+
+        // System.out.println("numOddInTree: " + tree3.numOdd());
+
+
+        // LinkedTree tree4 = new LinkedTree();
+        // System.out.println("numOdd of null tree = " + tree4.numOdd());
+        // int[] keys = {37, 26, 42, 13, 35, 56, 30, 47, 70};
+        // tree4.insertKeys(keys);
+        // System.out.println("numOdd of tree4 = " + tree4.numOdd());
+
+
+
+        // LinkedTree tree5 = new LinkedTree();
+        // System.out.println("empty tree: " + tree5.deleteMin());
+
+        // int[] keys5 = {37, 26, 42, 13, 35, 56, 30, 47, 70};
+        // tree5.insertKeys(keys5);
+        // System.out.println("levels of original tree:");
+        // tree5.levelOrderPrint();
+
+        // System.out.println("\ndeleteMin: " + tree5.deleteMin());
+        // tree5.levelOrderPrint();
+        // System.out.println("\ndeleteMin: " + tree5.deleteMin());
+        // tree5.levelOrderPrint();
+
+
+        LinkedTree treeX = new LinkedTree();
+        // int[] keysX = {40, 20, 60, 10, 30,50, 70, 5, 15, 25, 35, 45, 55, 65, 75};
+        int[] keysX =  {50, 25, 75, 10, 40, 60, 90, 5, 15, 35, 45, 80, 95};;
+        treeX.insertKeys(keysX);
+
+        // // iterator look
+        // System.out.println();
+        // System.out.println("Iterator look: ");
+        System.out.println();
+        treeX.levelOrderPrint();
         System.out.println();
 
-        System.out.println("numOddInTree: " + tree3.numOdd());
+        // LinkedTreeIterator iter = treeX.preorderIterator();
+        // while (iter.hasNext()) {
+        // // while (true) {
+        //     // int key = iter.next();
+        //     // System.out.println(key);
+        //     System.out.println(iter.next());
+        //     // do something with key
+        // }
 
-
-        LinkedTree tree4 = new LinkedTree();
-        System.out.println("numOdd of null tree = " + tree4.numOdd());
-        int[] keys = {37, 26, 42, 13, 35, 56, 30, 47, 70};
-        tree4.insertKeys(keys);
-        System.out.println("numOdd of tree4 = " + tree4.numOdd());
-
-
-
-        LinkedTree tree5 = new LinkedTree();
-        System.out.println("empty tree: " + tree5.deleteMin());
-
-        int[] keys5 = {37, 26, 42, 13, 35, 56, 30, 47, 70};
-        tree5.insertKeys(keys5);
-        System.out.println("levels of original tree:");
-        tree5.levelOrderPrint();
-
-        System.out.println("\ndeleteMin: " + tree5.deleteMin());
-        tree5.levelOrderPrint();
-        System.out.println("\ndeleteMin: " + tree5.deleteMin());
-        tree5.levelOrderPrint();
-
-
-        LinkedTreeIterator iter = tree3.preorderIterator();
-        while (iter.hasNext()) {
-            int key = iter.next();
-            System.out.println(key);
-            // do something with key
+        LinkedTreeIterator iterp = treeX.PostorderIterator();
+        // System.out.println(iterp.next());
+        while (iterp.hasNext()) {
+            System.out.println(iterp.next());
         }
+
     }
 }
